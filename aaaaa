@@ -1,0 +1,81 @@
+
+class Probe : public RenderObject2D
+{
+	unsigned char trans;
+	Point<float> pos;
+public:
+	Probe(Point<float> set_pos):
+	pos(set_pos)
+	{
+	}
+	void draw() override
+	{
+		DrawCircle(pos.getX(), pos.getY(), 10, WHITE);
+		if(trans != 0)
+		{
+			DrawCircle(pos.getX(), pos.getY(), 10, GREEN);
+		}
+	}
+	void update() override
+	{
+		// trans = 0;
+	}
+
+	unsigned char gt()
+	{
+		return trans;
+	}
+	void st(unsigned char set)
+	{
+		trans = set;
+	}
+	Point<float> getPos()
+	{
+		return pos;
+	}
+};
+class Wire : public RenderObject2D
+{
+	Probe* a;
+	Probe* b;
+	public:
+	Wire(Probe* new_a, Probe* new_b)
+	{
+		a = new_a;
+		b = new_b;
+		setLayer(DrawLayer::BACK);
+	}
+	void draw() override
+	{
+		Line2D(a->getPos(), b->getPos(), WHITE).draw();
+	}
+	void update() override
+	{
+		unsigned char swap = a->gt();
+		a->st(b->gt());
+		b->st(swap);
+	}
+};
+
+void TwilightEngine::userSetup()
+{
+	Probe* a = new Probe(Point<float>(100, 100));
+	Probe* b = new Probe(Point<float>(200, 100));
+	Probe* c = new Probe(Point<float>(200, 200));
+	Probe* d = new Probe(Point<float>(100, 200));
+	addRenderObject(a);
+	addRenderObject(b);
+	addRenderObject(c);
+	addRenderObject(d);
+
+	Wire* e = new Wire(a, b);
+	Wire* f = new Wire(b, c);
+	Wire* g = new Wire(c, d);
+	Wire* h = new Wire(d, a);
+	addRenderObject(e);
+	addRenderObject(f);
+	addRenderObject(g);
+	addRenderObject(h);
+
+	b->st(0xff);
+}
