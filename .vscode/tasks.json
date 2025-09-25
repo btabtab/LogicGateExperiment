@@ -6,7 +6,7 @@
         {
             "label": "BUILD_WITH_CLANG",
             "type": "shell",
-            "command": "clang++ TwilightEngineCore/*.cpp TwilightEngineCore/*/*.cpp *.cpp -lraylib -lGL -lm -lpthread -ldl -lrt -lX11 -lncurses -g -o CoffeeCore.debug",
+            "command": "clang++ *.cpp -lraylib -lGL -lm -lpthread -ldl -lrt -lX11 -lncurses -g -o logic_gate_experiment.debug",
             "problemMatcher": [],
             "group": {
                 "kind": "build",

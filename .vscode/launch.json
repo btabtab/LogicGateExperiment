@@ -8,7 +8,7 @@
           "name": "DEBUG_CELL_CLANG",
           "type": "cppdbg",
           "request": "launch",
-          "program": "${workspaceRoot}/CoffeeCore.debug",
+          "program": "${workspaceRoot}/logic_gate_experiment.debug",
           "args": ["-wizard", "-metrics"],
           "stopAtEntry": false,
           "cwd": "${workspaceFolder}",
